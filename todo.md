@@ -1,0 +1,17 @@
+# Project TODO
+
+- [x] Consultar exclusivamente dados oficiais do BACEN para PTAX USD/BRL
+- [x] Permitir consulta por data específica
+- [x] Permitir consulta por intervalo de datas
+- [x] Retornar apenas cotações do dólar USD/BRL
+- [x] Exibir data e valor da PTAX no formato `dd/mm/aaaa - 0,0000`
+- [x] Exibir horário da última atualização para PTAX parcial no formato `dd/mm/aaaa - 0,0000 (HH:mm)`
+- [x] Ordenar resultados por data crescente
+- [x] Retornar última PTAX disponível anterior quando a data solicitada não tiver cotação
+- [x] Identificar automaticamente se a PTAX é parcial ou fechada
+- [x] Manter a resposta objetiva, sem textos explicativos adicionais na área de resultado
+- [x] Implementar interface mobile iOS-style em orientação retrato
+- [x] Validar datas no padrão brasileiro
+- [x] Criar identidade visual e ícone próprio do aplicativo
+- [x] Atualizar configuração do aplicativo com nome e logo
+- [x] Validar tipagem e testes do projeto antes da entrega
