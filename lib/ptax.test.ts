@@ -41,9 +41,11 @@ describe("PTAX USD", () => {
 
     const result = await queryPtaxForDate(parseBrazilianDate("11/05/2026")!);
 
-    expect(result.formatted).toBe("11/05/2026 - 4,8973");
+    expect(result.formatted).toBe("11/05/2026 - C: 4,8967 / V: 4,8973");
+    expect(result.buyValue).toBe(4.8967);
+    expect(result.sellValue).toBe(4.8973);
     expect(result.isPartial).toBe(false);
-    expect(createObjectiveOutput([result])).toBe("11/05/2026 - 4,8973");
+    expect(createObjectiveOutput([result])).toBe("11/05/2026 - C: 4,8967 / V: 4,8973");
   });
 
   it("retorna a última PTAX anterior quando a data solicitada não tem cotação", async () => {
@@ -74,7 +76,9 @@ describe("PTAX USD", () => {
 
     const result = await queryPtaxForDate(parseBrazilianDate("10/05/2026")!);
 
-    expect(result.formatted).toBe("10/05/2026 - 4,8999");
+    expect(result.formatted).toBe("10/05/2026 - C: 4,8993 / V: 4,8999");
+    expect(result.buyValue).toBe(4.8993);
+    expect(result.sellValue).toBe(4.8999);
     expect(result.sourceDate).toBe("08/05/2026");
     expect(result.isPartial).toBe(false);
   });

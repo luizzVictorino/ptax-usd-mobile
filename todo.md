@@ -15,3 +15,7 @@
 - [x] Criar identidade visual e ícone próprio do aplicativo
 - [x] Atualizar configuração do aplicativo com nome e logo
 - [x] Validar tipagem e testes do projeto antes da entrega
+- [x] Exibir valor de compra (cotacaoCompra) da PTAX
+- [x] Exibir valor de venda (cotacaoVenda) da PTAX
+- [x] Atualizar formato de saída para incluir ambos os valores
+- [x] Atualizar testes para validar os novos valores

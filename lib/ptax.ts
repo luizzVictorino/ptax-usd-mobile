@@ -3,7 +3,8 @@ export type QueryMode = "single" | "range";
 export type PtaxLine = {
   requestedDate: string;
   sourceDate: string;
-  value: number;
+  buyValue: number;
+  sellValue: number;
   formatted: string;
   isPartial: boolean;
   time?: string;
@@ -80,12 +81,15 @@ function buildLine(requestedDate: Date, rate: BacenRate, isPartial: boolean): Pt
   const sourceDate = fromBacenDateTime(rate.dataHoraCotacao);
   const requested = formatBrazilianDate(requestedDate);
   const time = isPartial ? formatTimeFromBacen(rate.dataHoraCotacao) : undefined;
-  const formatted = `${requested} - ${formatPtaxValue(rate.cotacaoVenda)}${time ? ` (${time})` : ""}`;
+  const buyFormatted = formatPtaxValue(rate.cotacaoCompra);
+  const sellFormatted = formatPtaxValue(rate.cotacaoVenda);
+  const formatted = `${requested} - C: ${buyFormatted} / V: ${sellFormatted}${time ? ` (${time})` : ""}`;
 
   return {
     requestedDate: requested,
     sourceDate: formatBrazilianDate(sourceDate),
-    value: rate.cotacaoVenda,
+    buyValue: rate.cotacaoCompra,
+    sellValue: rate.cotacaoVenda,
     formatted,
     isPartial,
     time,
