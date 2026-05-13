@@ -47,7 +47,7 @@ Ela é atualizada em até 4 janelas durante o dia:
 * 12h
 * 13h
 
-Após o fechamento, a PTAX oficial consolidada é disponibilizada pelo Bacen. ([GitHub][1])
+Após o fechamento, a PTAX oficial consolidada é disponibilizada pelo Bacen.
 
 ---
 
