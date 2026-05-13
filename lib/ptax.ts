@@ -149,21 +149,34 @@ async function getLatestPreviousClosedRate(date: Date): Promise<BacenRate> {
   throw new Error("Não foi encontrada PTAX anterior disponível no BACEN para a data informada.");
 }
 
-export async function queryPtaxForDate(date: Date): Promise<PtaxLine> {
+export async function queryPtaxForDate(date: Date): Promise<PtaxLine[]> {
   const today = todayUtcMidday();
   const bulletins = await getUsdBulletins(date);
   const closing = bulletins.find((rate) => rate.tipoBoletim === "Fechamento PTAX");
+  const results: PtaxLine[] = [];
+  const isToday = isSameUtcDay(date, today);
 
+  // Se encontrou fechamento PTAX, adiciona à lista
   if (closing) {
-    return buildLine(date, closing, false);
+    results.push(buildLine(date, closing, false));
   }
 
-  if (isSameUtcDay(date, today) && bulletins.length > 0) {
-    return buildLine(date, bulletins[bulletins.length - 1], true);
+  // Se é hoje, procura por boletim intermediário (mais recente que não seja fechamento)
+  if (isToday && bulletins.length > 0) {
+    // Encontra o boletim intermediário mais recente
+    const intermediate = [...bulletins].reverse().find((rate) => rate.tipoBoletim !== "Fechamento PTAX");
+    if (intermediate) {
+      results.push(buildLine(date, intermediate, true));
+    }
   }
 
-  const fallback = await getLatestPreviousClosedRate(date);
-  return buildLine(date, fallback, false);
+  // Se não encontrou nada, usa fallback
+  if (results.length === 0) {
+    const fallback = await getLatestPreviousClosedRate(date);
+    results.push(buildLine(date, fallback, false));
+  }
+
+  return results;
 }
 
 export async function queryPtaxRange(start: Date, end: Date): Promise<PtaxLine[]> {
@@ -179,7 +192,8 @@ export async function queryPtaxRange(start: Date, end: Date): Promise<PtaxLine[]
     const shouldInclude = dayOfWeek !== 0 && dayOfWeek !== 6;
 
     if (shouldInclude) {
-      results.push(await queryPtaxForDate(new Date(cursor.getTime())));
+      const dayResults = await queryPtaxForDate(new Date(cursor.getTime()));
+      results.push(...dayResults);
     }
 
     cursor.setUTCDate(cursor.getUTCDate() + 1);
@@ -188,7 +202,9 @@ export async function queryPtaxRange(start: Date, end: Date): Promise<PtaxLine[]
   return results.sort((a, b) => {
     const da = parseBrazilianDate(a.requestedDate)?.getTime() ?? 0;
     const db = parseBrazilianDate(b.requestedDate)?.getTime() ?? 0;
-    return da - db;
+    if (da !== db) return da - db;
+    // Se mesma data, parcial vem depois da fechada
+    return a.isPartial ? 1 : -1;
   });
 }
 

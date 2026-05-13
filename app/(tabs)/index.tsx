@@ -92,7 +92,7 @@ export default function HomeScreen() {
     try {
       const lines =
         mode === "single" && parsedSingle
-          ? [await queryPtaxForDate(parsedSingle)]
+          ? await queryPtaxForDate(parsedSingle)
           : await queryPtaxRange(parsedStart!, parsedEnd!);
 
       const objectiveOutput = createObjectiveOutput(lines);

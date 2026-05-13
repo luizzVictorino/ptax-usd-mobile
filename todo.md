@@ -19,3 +19,7 @@
 - [x] Exibir valor de venda (cotacaoVenda) da PTAX
 - [x] Atualizar formato de saída para incluir ambos os valores
 - [x] Atualizar testes para validar os novos valores
+- [x] Exibir PTAX fechada e cotação parcial do mesmo dia simultaneamente
+- [x] Manter ambas as linhas mesmo quando já passou das 13h
+- [x] Atualizar lógica de consulta para retornar ambas as cotações
+- [x] Atualizar testes para validar exibição dupla de cotações
