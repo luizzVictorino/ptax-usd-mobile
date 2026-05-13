@@ -140,8 +140,6 @@ Referências:
 
 # 📈 Versões
 
-# 📈 Versões
-
 ## v1.0.1
 
 ### Versão inicial
