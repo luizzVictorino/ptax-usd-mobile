@@ -9,7 +9,7 @@ O app permite consultar:
 * Valor parcial da PTAX enquanto o fechamento oficial ainda não ocorreu
 * Consulta rápida e simplificada para dispositivos móveis
 
-A PTAX é a taxa de câmbio de referência divulgada pelo Banco Central do Brasil, calculada a partir de consultas realizadas ao longo do dia. ([GitHub][1])
+A PTAX é a taxa de câmbio de referência divulgada pelo Banco Central do Brasil, calculada a partir de consultas realizadas ao longo do dia.
 
 ---
 
@@ -134,7 +134,6 @@ Referências:
 * Serviço PTAX OData
 * Cotações oficiais USD/BRL
 
-([GitHub][2])
 
 ---
 
