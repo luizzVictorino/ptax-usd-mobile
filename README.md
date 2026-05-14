@@ -1,4 +1,3 @@
-````md
 # PTAX USD Mobile
 
 Aplicativo mobile para consulta da cotação PTAX do dólar (USD/BRL), utilizando exclusivamente dados oficiais do Banco Central do Brasil (BACEN).
