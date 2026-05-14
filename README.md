@@ -1,57 +1,85 @@
+````md
 # PTAX USD Mobile
 
-Aplicativo mobile para consulta da cotação PTAX do dólar (USD/BRL) utilizando dados oficiais do Banco Central do Brasil.
+Aplicativo mobile para consulta da cotação PTAX do dólar (USD/BRL), utilizando exclusivamente dados oficiais do Banco Central do Brasil (BACEN).
 
-O app permite consultar:
-
-* Cotação PTAX do dia
-* Histórico por intervalo de datas
-* Valor parcial da PTAX enquanto o fechamento oficial ainda não ocorreu
-* Consulta rápida e simplificada para dispositivos móveis
-
-A PTAX é a taxa de câmbio de referência divulgada pelo Banco Central do Brasil, calculada a partir de consultas realizadas ao longo do dia.
+O projeto foi desenvolvido com auxílio da IA Manus, utilizando engenharia de prompts para evolução incremental das funcionalidades entre as versões.
 
 ---
 
-# 📱 Funcionalidades
+# 📱 Sobre o Projeto
 
-* Consulta da PTAX USD/BRL
-* Histórico de cotações
-* Exibição da PTAX parcial do dia
-* Interface mobile simplificada
-* Consumo de API oficial do Banco Central
-* Atualização automática dos dados
-* Suporte a múltiplos períodos de consulta
+O objetivo do aplicativo é fornecer uma forma simples, rápida e objetiva de consultar a PTAX oficial do dólar americano diretamente das APIs do BACEN.
+
+O app permite:
+
+- Consultar PTAX do dólar
+- Consultar por data específica
+- Consultar por intervalo de datas
+- Exibir PTAX parcial do dia
+- Exibir horário da última atualização parcial
+- Consultar valores de compra e venda
+- Retornar automaticamente a última PTAX válida em feriados/finais de semana
 
 ---
 
 # 🚀 Tecnologias Utilizadas
 
-* React Native
-* Expo
-* TypeScript / JavaScript
-* API PTAX do Banco Central
-* Axios / Fetch API
-* Mobile First Design
+- React Native
+- Expo
+- JavaScript
+- API Oficial PTAX BACEN
+- Fetch API
+- Mobile First
 
 ---
 
-# 🏦 Sobre a PTAX
+# 🏦 Fonte Oficial dos Dados
 
-A PTAX é a taxa oficial de referência do dólar divulgada pelo Banco Central do Brasil.
+Todos os dados são obtidos exclusivamente do:
 
-Ela é atualizada em até 4 janelas durante o dia:
+- Banco Central do Brasil (BACEN)
+- Serviço PTAX Oficial
+- API OData BACEN
 
-* 10h
-* 11h
-* 12h
-* 13h
-
-Após o fechamento, a PTAX oficial consolidada é disponibilizada pelo Bacen.
+O aplicativo não utiliza serviços terceiros para consulta cambial.
 
 ---
 
-# 📦 Instalação
+# 📦 Funcionalidades
+
+## Consulta da PTAX
+- PTAX do dólar USD/BRL
+- Valor de compra
+- Valor de venda
+
+## Pesquisa por período
+- Consulta por data específica
+- Consulta por intervalo de datas
+
+## PTAX Parcial
+Quando a PTAX do dia ainda não estiver consolidada, o sistema exibe:
+
+```text
+11/05/2026 - Compra: 5,2345 | Venda: 5,2351 (10:00)
+```
+
+## PTAX Fechada
+Quando o fechamento oficial estiver disponível:
+
+```text
+09/05/2026 - Compra: 5,1987 | Venda: 5,1993
+```
+
+## Tratamento automático
+- Finais de semana
+- Feriados
+- Última PTAX disponível
+- Identificação automática de PTAX parcial ou fechada
+
+---
+
+# ▶️ Instalação
 
 Clone o repositório:
 
@@ -59,7 +87,7 @@ Clone o repositório:
 git clone https://github.com/luizzVictorino/ptax-usd-mobile.git
 ```
 
-Acesse a pasta do projeto:
+Acesse a pasta:
 
 ```bash
 cd ptax-usd-mobile
@@ -81,7 +109,7 @@ yarn install
 
 # ▶️ Executando o Projeto
 
-Inicie o projeto:
+Iniciar aplicação:
 
 ```bash
 npm start
@@ -115,92 +143,140 @@ ptax-usd-mobile/
 ├── components/
 ├── screens/
 ├── services/
-├── hooks/
 ├── utils/
-├── App.tsx
+├── App.js
 ├── package.json
 └── README.md
 ```
 
 ---
 
-# 🔌 API Utilizada
+# 📈 Histórico de Versões
 
-Dados obtidos através da API oficial PTAX do Banco Central do Brasil.
+# v1.0.1
+## Primeira versão funcional
 
-Referências:
+Desenvolvida utilizando o seguinte prompt na IA Manus:
 
-* Dados Abertos Bacen
-* Serviço PTAX OData
-* Cotações oficiais USD/BRL
+```text
+Crie uma app para consultar a PTAX diretamente no site/API do Banco Central do Brasil (BACEN), com foco exclusivo na cotação do dólar (USD/BRL).
 
+Requisitos obrigatórios:
 
----
+* A IA deve acessar os dados oficiais do BACEN.
+* Deve permitir selecionar:
+  * uma data específica
+  * ou um intervalo de datas
+* Retornar apenas a PTAX do dólar.
+* Exibir:
+  * data
+  * valor da PTAX
+* Quando a PTAX do dia ainda não estiver fechada/consolidada, retornar a cotação parcial junto com o horário da última atualização.
 
-# 📈 Versões
+Formato esperado:
 
-## v1.0.1
+* PTAX fechada:
+  * 09/05/2026 - 5,2345
 
-### Versão inicial
+* PTAX parcial:
+  * 11/05/2026 - 5,2345 (10:00)
 
-* Consulta da PTAX USD/BRL
-* Integração com API do Banco Central
-* Exibição da cotação do dia
-* Estrutura inicial do aplicativo mobile
-* Interface básica para consulta rápida
+Regras importantes:
 
----
+* Utilizar exclusivamente dados oficiais do BACEN.
+* Não retornar outras moedas.
+* Ordenar os resultados por data crescente.
+* Caso não exista cotação no dia (feriado/fim de semana), retornar a última PTAX disponível anterior.
+* O sistema deve identificar automaticamente se a PTAX é parcial ou fechada.
+* A resposta deve ser objetiva, sem textos explicativos adicionais.
+```
 
-## v1.0.2
-
-### Melhorias e correções
-
-* Ajustes de layout
-* Melhor tratamento de erros de conexão
-* Melhorias de performance
-* Correções na busca da PTAX
-* Ajustes na exibição de datas e valores
-* Melhor estabilidade da aplicação
-
----
-
-## v1.0.3
-
-### Atualização de usabilidade e estabilidade
-
-* Melhorias na experiência do usuário
-* Otimização das consultas à API
-* Ajustes visuais na interface
-* Melhor organização do código
-* Correções gerais de bugs
-* Melhor compatibilidade entre dispositivos Android/iOS
+### Funcionalidades implementadas
+- Consulta PTAX USD
+- Consulta por data
+- Consulta por período
+- PTAX parcial
+- Integração BACEN
+- Retorno automático da última PTAX válida
 
 ---
 
-# 🛠 Roadmap
+# v1.0.2
+## Inclusão de compra e venda
 
-* [ ] Favoritos de períodos
-* [ ] Gráfico de variação
-* [ ] Modo dark
-* [ ] Exportação CSV
-* [ ] Notificações de variação cambial
-* [ ] Widget Android/iOS
+Prompt utilizado na IA Manus:
+
+```text
+deve retornar o valor de compra e valor de venda
+```
+
+### Melhorias implementadas
+- Valor de compra da PTAX
+- Valor de venda da PTAX
+- Melhor apresentação das cotações
+- Ajustes de layout e usabilidade
+
+---
+
+# v1.0.3
+## Ajuste de PTAX parcial após 13h
+
+Prompt utilizado na IA Manus:
+
+```text
+mesmo que passe das 13hrs. a ptax deve aparecer a parcial do dia junto com a ptax do dia. assim como mostra a imagem
+```
+
+### Melhorias implementadas
+- Exibição simultânea:
+  - PTAX fechada
+  - PTAX parcial do dia
+- Melhor lógica de atualização
+- Melhor experiência visual
+- Correções de estabilidade
+
+---
+
+# 🔮 Roadmap
+
+- [ ] Gráfico de variação cambial
+- [ ] Favoritos de consultas
+- [ ] Exportação CSV
+- [ ] Tema Dark Mode
+- [ ] Widget Android/iOS
+- [ ] Notificações cambiais
+
+---
+
+# 🤖 Desenvolvimento com IA
+
+Este projeto foi desenvolvido com auxílio da IA Manus, utilizando engenharia de prompts incremental para evolução contínua das funcionalidades do aplicativo.
+
+O Manus é uma plataforma de IA voltada para automação, geração de código e execução de tarefas orientadas por prompts.
+
+Site oficial:
+https://manus.im/app
+
+Cada versão do aplicativo foi refinada através de prompts específicos, permitindo adicionar novas regras de negócio, melhorias visuais e ajustes no comportamento da aplicação ao longo das releases.
+
+Importante:
+O Manus não é oficialmente um produto da Meta. Embora existam notícias e especulações sobre investimentos e possíveis aquisições envolvendo empresas do setor, não há confirmação oficial que caracterize o Manus como um produto da Meta.
 
 ---
 
 # 📄 Licença
 
-Este projeto está sob licença MIT.
+Projeto sob licença MIT.
 
 ---
 
 # 👨‍💻 Autor
 
-Desenvolvido por Luiz Victorino.
+Luiz Victorino
 
-GitHub: [luizzVictorino](https://github.com/luizzVictorino?utm_source=chatgpt.com)
+GitHub:
+https://github.com/luizzVictorino
 
-Repositório: [ptax-usd-mobile](https://github.com/luizzVictorino/ptax-usd-mobile?utm_source=chatgpt.com)
-
-[1]: https://github.com/fintech-hub/cotacao-diaria-dolar?utm_source=chatgpt.com "GitHub - leogregianin/cotacao-diaria-dolar: 💵 💰 🇧🇷 Cotações diárias Dólar"
-[2]: https://github.com/rodrigues-t/ptax?utm_source=chatgpt.com "GitHub - rodrigues-t/ptax: Check PTAX exchange rates history of several currencies by open data API of Central Bank of Brazil."
+Repositório:
+https://github.com/luizzVictorino/ptax-usd-mobile
+````
